@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.*;
 import java.util.Scanner;
 
-public class StringConverter {
+public class StringConverter 
+{
     public static void convertString()
     {
         try {
@@ -32,7 +33,8 @@ public class StringConverter {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();
 
-            while (line != null) {
+            while (line != null) 
+            {
                 sb.append(line).append("\n");
                 line = br.readLine();
             }
@@ -42,7 +44,8 @@ public class StringConverter {
             char[] charArray = fileAsString.toCharArray();
             for(int i=0; i<charArray.length;i++)
             {
-                if (!Character.isDigit(charArray[i])) {
+                if (!Character.isDigit(charArray[i])) 
+                {
                     numRemoved = numRemoved + charArray[i];
                 }
             }
@@ -56,11 +59,13 @@ public class StringConverter {
             {
 
                 //Checking if string is an lowercase character
-                if(Character.isLowerCase(numRemoved.charAt(i))) {
+                if(Character.isLowerCase(numRemoved.charAt(i))) 
+                {
                     newStringB.setCharAt(i, Character.toUpperCase(numRemoved.charAt(i)));//Converting relevant character using toUpperCase
                 }
                 //Checking if string is an uppercase character
-                else if(Character.isUpperCase(numRemoved.charAt(i))) {
+                else if(Character.isUpperCase(numRemoved.charAt(i))) 
+                {
                     newStringB.setCharAt(i, Character.toLowerCase(numRemoved.charAt(i)));//Converting relevant character using toUpperCase
                 }
             }
@@ -73,9 +78,36 @@ public class StringConverter {
             out.close();
 
 
-        } catch (IOException errorDetails) {
+        } 
+        catch (IOException errorDetails) 
+        {
             System.out.println("Error: " + errorDetails.getMessage());
         }
     }
 
+    public static void validation(File file)
+    {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+            while (line != null) {
+                sb.append(line).append("\n");
+                line = br.readLine();
+            }
+            String fileAsString = sb.toString();
+            for (int i = 0; i < fileAsString.length(); i++) {
+                if (Character.isDigit(fileAsString.charAt(i)) == true)
+                {
+                    System.out.println("FILE INVALID :: File contains numeric values.");
+                    System.out.println("\nRemoving Numeric Values.......\n");
+                    fileAsString = fileAsString.replaceAll("[0-9]","");
+                }
+            }
+        } 
+        catch (IOException errorD) 
+        {
+            System.out.println("ERROR" + errorD.getMessage());
+        }
+    }
 }
