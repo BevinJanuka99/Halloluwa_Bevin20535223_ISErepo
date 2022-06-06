@@ -62,7 +62,7 @@ public class WeightConverter
                 }
 
             }*/
-
+            String strWeight = "";
             System.out.println("\nFile Saved");
             System.out.println("------------------------------------------------------------------------\n");
             weightOut.println(strWeight);
@@ -82,7 +82,7 @@ public class WeightConverter
     
     public static String readFile(File file)
     {
-        String strWeight = "";
+        String strWeight = ""; 
 
         try 
         {
