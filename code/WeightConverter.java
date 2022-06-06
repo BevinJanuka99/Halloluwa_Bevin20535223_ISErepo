@@ -23,7 +23,7 @@ public class WeightConverter
             PrintWriter weightOut = (new PrintWriter(new FileWriter(outputFileName)));
 
 
-            String strWeight = readFile(file);
+            /*String strWeight = readFile(file);
 
             StringBuilder convertedWeight = new StringBuilder();
 
@@ -61,7 +61,7 @@ public class WeightConverter
 
                 }
 
-            }
+            }*/
 
             System.out.println("\nFile Saved");
             System.out.println("------------------------------------------------------------------------\n");
@@ -79,6 +79,59 @@ public class WeightConverter
 
 
     }
+    
+    public static String readFile(File file)
+    {
+        String strWeight = "";
 
+        try 
+        {
+            StringBuilder convertedWeight = new StringBuilder();
+            Scanner sc2 = new Scanner(new File(String.valueOf(file)));
+            while (sc2.hasNext())
+            {
+                String line = sc2.nextLine();
+                String[] splitBy = line.split(" ");
+
+                double weight = Integer.parseInt(splitBy[0]);
+                String unit = splitBy[1];
+
+                switch (unit) 
+                {
+                    case "kg":
+                        weight = weight * 2.2046;
+                        convertedWeight.append(weight).append(" lbs\n");
+                        strWeight = convertedWeight.toString();
+                        //System.out.println(strWeight);
+                        break;
+
+                    case "lbs":
+                        weight = weight * 0.4536;
+                        convertedWeight.append(weight).append(" kg\n");
+                        strWeight = convertedWeight.toString();
+                        //System.out.println(strWeight);
+                        break;
+
+                    case "":
+                        strWeight = "Unit not defined correctly. Please enter weight with a space. Example: 50 kg ";
+                        break;
+
+                    default:
+                        break;
+
+                }
+            }
+
+        sc2.close();
+        }
+
+        catch (IOException errorDetails)
+        {
+            System.out.println("ERROR :::: " + errorDetails.getMessage());
+        }
+
+        return strWeight;
+
+    }
     
 }
